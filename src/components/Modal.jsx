@@ -1,8 +1,14 @@
-import React from "react";
+import {useState} from "react";
+import Mensaje from './Mensaje';
 import CerrarBtn from "../img/cerrar.svg";
 
 
 const Modal = ({setModal,setanimarModal,animarModal}) => {
+
+    const [nombre, setNombre] = useState('');
+    const [cantidad, setCantidad] = useState('');
+    const [categoria, setCategoria] = useState('');
+    const [mensaje, setMensaje] = useState('');
 
 const ocultarModal = () => {
 
@@ -13,6 +19,21 @@ const ocultarModal = () => {
         setModal(false);
     }, 500)
 }
+
+const handleSubmit = e =>{
+    e.preventDefault();
+
+    if([nombre,categoria,cantidad].includes('')){
+        setMensaje('Todos los campos son obligatorios');
+
+        setTimeout(()=>{
+            setMensaje('');
+        },2000)
+
+        return;
+    }
+}
+
     return(
        <div className="modal">
             <div className="cerrar-modal">
@@ -22,14 +43,17 @@ const ocultarModal = () => {
                     onClick={ocultarModal}
                 />
             </div>
-            <form action="" className={`formulario ${animarModal ? 'animar' : 'cerrar'}`}>
+            <form onSubmit={handleSubmit} className={`formulario ${animarModal ? 'animar' : 'cerrar'}`}>
 
                 <legend>Nuevo Gasto</legend>
+                {Mensaje && <Mensaje tipo="error">{mensaje}</Mensaje> }
                 <div className="campo">
                     <label htmlFor="nombre">Nombre gasto</label>
                     <input type="text"
                     id="nombre"
                     name="nombre" 
+                    value={nombre}
+                    onChange={e => setNombre(e.target.value)}
                     placeholder="Añade el nombre del gasto"
                     />
                 </div>
@@ -39,14 +63,17 @@ const ocultarModal = () => {
                     <input type="number"
                     id="cantidad"
                     name="cantidad" 
+                    value={cantidad}
+                    onChange={e => setCantidad(Number(e.target.value))}
                     placeholder="Añade la cantidad del gasto: ej. 300"
                     />
                 </div>
 
                 <div className="campo">
-                    <label htmlFor="categoria">Categoría</label>
+                    <label htmlFor="categoria" >Categoría</label>
 
-                    <select name="categoria" id="categoria">
+                    <select name="categoria" id="categoria" value={categoria}
+                     onChange={e => setCategoria(e.target.value)}>
                         <option value="">--Selecciona</option>
                         <option value="ahorro">Ahorro</option>
                         <option value="comida">Comida</option>
