@@ -21,25 +21,39 @@ function App() {
   const [gastoEditar, setGastoEditar] = useState({});
 
   useEffect(()=>{
-    console.log('componente listo')
+    if(Object.keys(gastoEditar).length > 0){
+      setModal(true);
+      setTimeout(() => {
+          setanimarModal(true)
+      }, 500)
+    }
   }, [gastoEditar])
 
   const handleNuevoGasto = () =>{
-    //console.log('nuevo gasto')
     setModal(true);
-
+    setGastoEditar({});
     setTimeout(() => {
         setanimarModal(true)
     }, 500)
   }
 
   const guardarGasto = gasto =>{
-    gasto.id = generarId();
-    gasto.fecha = Date.now();
-    setGastos([...gastos,gasto]);
+    if(gasto.id){
+      //actualizar
+      const gastosActualizados = gastos.map( gastoState => {
+        gastoState.id === gasto.id ? gasto : gastoState
+      })
+      setGastos(gastosActualizados);
+    }
+    else{
+      //nuevo gasto
+      gasto.id = generarId();
+      gasto.fecha = Date.now();
+      setGastos([...gastos,gasto]);
+    }
+
 
     setanimarModal(false);
-
     setTimeout(() => {
         setModal(false);
     }, 500)
@@ -80,6 +94,8 @@ function App() {
           setanimarModal={setanimarModal}
           animarModal={animarModal}
           guardarGasto={guardarGasto}
+          gastoEditar={gastoEditar}
+          setGastoEditar={setGastoEditar}
         />
       )}
     </div>
