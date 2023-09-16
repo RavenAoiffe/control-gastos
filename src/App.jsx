@@ -44,6 +44,7 @@ function App() {
         gastoState.id === gasto.id ? gasto : gastoState
       )
       setGastos(gastosActualizados);
+      setGastoEditar({})
     }
     else{
       //nuevo gasto
