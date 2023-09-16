@@ -58,23 +58,22 @@ const ControlPresupuesto = ({presupuesto,gastos,setGastos,setPresupuesto,setisVa
                     value={porcentaje}
                     text={`${porcentaje}% gastado`}
                 />
-
-                <div className="contenido-presupuesto">
-                    <button className="reset-app"
-                    type="button"
-                    onClick={handleResetApp}>
-                        Resetear App
-                    </button>
-                    <p> 
-                        <span>Presupuesto: </span> {formatearCantidad(presupuesto)}
-                    </p>
-                    <p className={`${disponible < 0 ? 'negativo' : ''}`}> 
-                        <span>Disponible: </span> {formatearCantidad(disponible)}
-                    </p>
-                    <p> 
-                        <span>Gastado: </span> {formatearCantidad(gastado)}
-                    </p>
-                </div>
+            </div>
+            <div className="contenido-presupuesto">
+                <button className="reset-app"
+                type="button"
+                onClick={handleResetApp}>
+                    Resetear App
+                </button>
+                <p> 
+                    <span>Presupuesto: </span> {formatearCantidad(presupuesto)}
+                </p>
+                <p className={`${disponible < 0 ? 'negativo' : ''}`}> 
+                    <span>Disponible: </span> {formatearCantidad(disponible)}
+                </p>
+                <p> 
+                    <span>Gastado: </span> {formatearCantidad(gastado)}
+                </p>
             </div>
         </div>
     )
