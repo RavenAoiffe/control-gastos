@@ -23,7 +23,7 @@ function App() {
   );
 
   const[filtro, setFiltro] = useState('');
-  const[gastosFiltrafos, setgastosFiltrafos] = useState('');
+  const[gastosFiltrados, setgastosFiltrados] = useState('');
 
 
   //escuchando por los cambios
@@ -54,7 +54,8 @@ function App() {
     if(filtro){
       //filtrar por categoría
       const gastosFiltrados = gastos.filter(gasto => gasto.categoria === filtro)
-      setgastosFiltrafos(gastosFiltrados)
+      setgastosFiltrados(gastosFiltrados)
+      //console.log(gastosFiltrados)
     }
   },[filtro])
   //presupuesto local storage
@@ -124,7 +125,8 @@ function App() {
               gastos={gastos}
               setGastoEditar={setGastoEditar}
               eliminarGasto={eliminarGasto}
-              setgastosFiltrafos={setgastosFiltrafos}
+              filtro={filtro}
+              gastosFiltrados={gastosFiltrados}
             />
           </main>
           <div className="nuevo-gasto">

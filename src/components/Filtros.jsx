@@ -9,7 +9,7 @@ const Filtros = ({filtro,setFiltro})=>{
                 <select name="filtrar" value={filtro}
                     onChange={(e) =>setFiltro(e.target.value)}
                 >
-                    <option value="">--Selecciona</option>
+                    <option value="">--Todos los gastos</option>
                     <option value="ahorro">Ahorro</option>
                     <option value="comida">Comida</option>
                     <option value="casa">Casa</option>
