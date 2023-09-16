@@ -8,14 +8,18 @@ import {generarId}  from './helpers';
 import IconoNuevoGasto from './img/nuevo-gasto.svg';
 
 function App() {
-  const [presupuesto, setPresupuesto] = useState(0);
+  const [presupuesto, setPresupuesto] = useState([
+    Number(localStorage.getItem('presupuesto') ?? 0)
+  ]);
 
   const [isValidPresupuesto, setisValidPresupuesto] = useState(false);
 
   const [modal, setModal] = useState(false);
   const [animarModal, setanimarModal] = useState(false);
 
-  const [gastos, setGastos] = useState([]);
+  const [gastos, setGastos] = useState(
+    localStorage.getItem('gastos') ? JSON.parse(localStorage.getItem('gastos')) : []
+  );
 
   //escuchando por los cambios
   const [gastoEditar, setGastoEditar] = useState({});
@@ -28,6 +32,25 @@ function App() {
       }, 500)
     }
   }, [gastoEditar])
+
+  useEffect(()=>{
+    localStorage.setItem('presupuesto', presupuesto ?? 0)
+  },[presupuesto])
+
+  //Guardar datos en local storage
+
+  useEffect(() =>{
+    localStorage.setItem('gastos', JSON.stringify(gastos) ?? [])
+  }, [gastos])
+
+
+  useEffect(() => {
+    const presupuestoLS =Number(localStorage.getItem('presupuesto')) ?? 0;
+
+    if(presupuestoLS > 0){
+      setisValidPresupuesto(true)
+    }
+  },[])
 
   const handleNuevoGasto = () =>{
     setModal(true);
