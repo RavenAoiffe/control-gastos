@@ -40,9 +40,9 @@ function App() {
   const guardarGasto = gasto =>{
     if(gasto.id){
       //actualizar
-      const gastosActualizados = gastos.map( gastoState => {
+      const gastosActualizados = gastos.map( gastoState =>
         gastoState.id === gasto.id ? gasto : gastoState
-      })
+      )
       setGastos(gastosActualizados);
     }
     else{
@@ -51,7 +51,6 @@ function App() {
       gasto.fecha = Date.now();
       setGastos([...gastos,gasto]);
     }
-
 
     setanimarModal(false);
     setTimeout(() => {
